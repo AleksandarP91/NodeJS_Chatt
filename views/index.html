@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Chat</title>
+   
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="javascripts/socket.io.js"></script>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<script>
+
+  $(function () {
+    var socket = io.connect('http://localhost:3002');
+    $('form').submit(function(){
+      socket.emit('chat message', $('#m').val());
+      $('#m').val('');
+      return false;
+    });
+    socket.on('chat message', function(msg){
+      $('#messages').append($('<li class="list-group-item">').text(msg));
+  window.scrollTo(0,document.body.scrollHeight);
+
+    });
+  });
+
+
+function scroll()
+{ 
+  setTimeout(function()
+   {
+  window.scrollTo(0,document.body.scrollHeight);
+   },300);
+}
+
+</script>
+  </head>
+  <body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class = "navbar-brand" href="/">Chatt</a>
+            </div>
+        </div>
+    </div>
+ <div class="jumbotron">
+ <div class="row">
+    <div class="col-xs-10 col-lg-offset-1">
+    </br>
+    </br>
+    </br>
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat sodales purus id tempus. In blandit, felis quis faucibus ullamcorper, libero metus imperdiet velit, vitae suscipit urna felis eu ante. In varius augue eu sapien elementum convallis. Vestibulum purus erat, rhoncus vel purus vitae, commodo lobortis lorem. Vivamus condimentum cursus tortor, rutrum vehicula ipsum vestibulum non. Duis in ex at odio tincidunt gravida. Sed ex est, blandit luctus rutrum a, interdum ut eros. Maecenas suscipit, felis vel hendrerit tristique, dolor velit accumsan felis, eget posuere ante orci eget velit. Aenean sit amet nisl fringilla, commodo dui in, mattis tortor. Etiam rutrum vehicula nulla. Curabitur maximus lorem at neque porttitor, et finibus lacus egestas. Maecenas congue turpis id consequat laoreet. Suspendisse potenti.
+
+Etiam interdum blandit nisi a fermentum. Morbi mollis feugiat leo ut volutpat. Etiam scelerisque vitae orci eget laoreet. Aliquam porta blandit ex semper vulputate. Pellentesque in dui ut velit auctor tempus. Cras et commodo erat. Mauris quis pellentesque elit. Sed sed rhoncus felis, et convallis ex. Cras ut elementum nulla, vitae malesuada lacus. Aliquam ut hendrerit lorem. Mauris aliquam nisi leo, eget auctor justo feugiat sit amet. Proin rutrum dignissim neque nec egestas. Nunc in velit vel metus blandit lacinia. Vivamus a mauris id felis imperdiet varius.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-5 pull-right">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading" id="accordion" >
+                    <span class="glyphicon glyphicon-comment"></span> Chat
+                    <div class="btn-group pull-right">
+                        <a type="button" onclick="scroll()" class="btn btn-default btn-xs" data-toggle="collapse"  data-target="#collapseOne">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </div>
+                </div>
+            <div class="panel-collapse collapse" id="collapseOne" >
+                <div class="panel-body">
+                    <ul class="list-group" id="messages"></ul>
+                </div>
+                    <form action="">
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="m" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                       <span class="input-group-btn">
+                        <button class="btn btn-warning btn-sm" >Send</button>
+                        </span>
+                    </div>
+                </div>
+                   </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+ </body>
+</html>
